@@ -1,0 +1,61 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CarForm from '@components/CarForm/index.astro';
+import ConfirmationModal from '@components/ConfirmationModal.astro';
+import { carServiceInstance } from '@services/carService';
+import { DeleteIcon } from '@components/icons';
+import type { Car } from '@interfaces/car';
+
+export async function getStaticPaths() {
+	const cars = await carServiceInstance.getCars();
+
+	const paramsList = cars.map((car: Car) => ({
+		params: { id: car.id },
+	}));
+
+	return paramsList;
+}
+
+const { id } = Astro.params;
+
+const currentCar = await carServiceInstance.getCarById(id);
+
+if (!currentCar) {
+	return Astro.redirect('/');
+}
+---
+
+<BaseLayout>
+	<div class="flex justify-center items-center h-[calc(100vh-2rem)]">
+		<div
+			class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700"
+		>
+			<CarForm car={currentCar}>
+				<button
+					type="button"
+					data-modal-target="delete-model-modal"
+					data-modal-toggle="delete-model-modal"
+					class="flex items-center justify-center gap-2 w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-bold rounded-lg text-md px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 transition-colors cursor-default"
+				>
+					<DeleteIcon /> Eliminar
+				</button>
+			</CarForm>
+		</div>
+	</div>
+</BaseLayout>
+<ConfirmationModal id="delete-model-modal" />
+
+<script>
+	import { carServiceInstance } from '@services/carService';
+
+	const deleteButton = document.getElementById('delete-button');
+	const carId = window.location.pathname.split('/')[2];
+
+	const deleteModel = () => {
+		carServiceInstance.deleteCar(carId);
+
+		window.location.href = '/';
+	};
+
+	deleteButton?.addEventListener('click', deleteModel);
+</script>

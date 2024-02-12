@@ -1,0 +1,48 @@
+---
+import type { Props } from '@interfaces/confirmationModal.ts';
+import { WarningIcon, XIcon } from './icons';
+
+const { id } = Astro.props;
+---
+
+<div
+	id={id}
+	tabindex="-1"
+	class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 bg-gray-800/50"
+>
+	<div class="relative p-4 w-full max-w-md max-h-full">
+		<div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+			<button
+				id="close-button"
+				type="button"
+				class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white transition-colors"
+				data-modal-hide={id}
+			>
+				<XIcon />
+				<span class="sr-only">Cerrar modal</span>
+			</button>
+
+			<div class="p-4 md:p-5 text-center">
+				<WarningIcon />
+
+				<h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+					¿Estás seguro de eliminar este modelo?
+				</h3>
+				<button
+					id="delete-button"
+					type="button"
+					class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-semibold rounded-lg text-md inline-flex items-center px-5 py-2.5 text-center me-2"
+				>
+					Sí, estoy seguro
+				</button>
+				<button
+					id="cancel-button"
+					data-modal-hide={id}
+					type="button"
+					class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 border border-gray-300 font-semibold rounded-lg text-md px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+					>No, cancelar</button
+				>
+			</div>
+		</div>
+	</div>
+</div>

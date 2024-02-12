@@ -1,0 +1,28 @@
+---
+import { AddIcon } from '@components/icons';
+import CarList from '@components/CarList.astro';
+import Modal from '@components/Modal.astro';
+import CarForm from '@components/CarForm/index.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+	<div class="flex items-center gap-5">
+		<h1 class="text-4xl mb-4">Lista de automóviles</h1>
+		<button
+			data-modal-target="create-model-modal"
+			data-modal-toggle="create-model-modal"
+			type="button"
+			class="flex gap-2.5 items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-semibold rounded-lg text-md px-3 py-1.5 text-center me-2 mb-2 transition-all cursor-default"
+		>
+			<AddIcon /> Añadir modelo
+		</button>
+	</div>
+	<CarList />
+	<Modal id="create-model-modal">
+		<h3 class="text-2xl font-semibold text-white" slot="title">
+			Añade un modelo
+		</h3>
+		<CarForm />
+	</Modal>
+</BaseLayout>

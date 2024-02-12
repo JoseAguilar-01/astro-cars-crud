@@ -1,0 +1,22 @@
+{
+	"extends": [
+		"plugin:astro/recommended",
+		"plugin:prettier/recommended",
+		"prettier"
+	],
+	"overrides": [
+		{
+			"files": ["*.astro"],
+			"parser": "astro-eslint-parser",
+			"parserOptions": {
+				"parser": "@typescript-eslint/parser",
+				"extraFileExtensions": [".astro"]
+			},
+			"rules": {}
+		}
+	],
+	"rules": {
+		"prettier/prettier": "warn",
+		"no-unused-vars": "error"
+	}
+}

@@ -1,0 +1,10 @@
+---
+import CarCard from './CarCard.astro';
+import { carServiceInstance } from '@services/carService';
+
+const cars = await carServiceInstance.getCars();
+---
+
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 items-stretch gap-5">
+	{cars.map((car) => <CarCard car={car} />)}
+</div>

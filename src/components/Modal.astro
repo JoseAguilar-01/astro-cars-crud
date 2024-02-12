@@ -1,0 +1,46 @@
+---
+import type { Props } from '@interfaces/modal';
+import { XIcon } from './icons';
+
+const { id, showFooter = false } = Astro.props;
+---
+
+<!-- Main modal -->
+<div
+	id={id}
+	tabindex="-1"
+	aria-hidden="true"
+	class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 bg-gray-800/50"
+>
+	<div class="relative p-4 w-full max-w-2xl max-h-full">
+		<!-- Modal content -->
+		<div class="relative rounded-lg shadow bg-slate-800">
+			<!-- Modal header -->
+			<div
+				class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+			>
+				<slot name="title" />
+				<button
+					type="button"
+					class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white transition-colors cursor-default"
+					data-modal-hide={id}
+				>
+					<XIcon />
+					<span class="sr-only">Close modal</span>
+				</button>
+			</div>
+			<!-- Modal body -->
+			<div class="p-4 md:p-5 space-y-4">
+				<slot />
+			</div>
+			<!-- Modal footer -->
+			<div
+				class={showFooter
+					? 'flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600'
+					: 'hidden'}
+			>
+				<slot name="footer" />
+			</div>
+		</div>
+	</div>
+</div>

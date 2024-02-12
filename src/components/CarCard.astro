@@ -1,0 +1,37 @@
+---
+import type { Props } from '@interfaces/carCard';
+import { EditIcon } from './icons';
+
+const { car } = Astro.props;
+---
+
+<div
+	class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto w-full"
+>
+	<h5
+		class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+	>
+		{car.model}
+	</h5>
+
+	<ul
+		class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400"
+	>
+		<li><span>Marca:</span> {car.brand}</li>
+		<li><span>Año:</span> {car.year}</li>
+		<li><span>Color:</span> {car.color}</li>
+		<li><span>Precio:</span> ${car.price}</li>
+		<li><span>Motor:</span> {car.features.engine}</li>
+		<li><span>Transmisión:</span> {car.features.transmission}</li>
+		<li><span>Tracción:</span> {car.features.drivetrain}</li>
+	</ul>
+
+	<div class="flex justify-between mt-4">
+		<a
+			href={`/edit/${car.id}`}
+			class="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 transition-colors font-semibold px-2 py-1 rounded-md"
+		>
+			<EditIcon /> Editar
+		</a>
+	</div>
+</div>

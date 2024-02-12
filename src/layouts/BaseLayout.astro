@@ -1,0 +1,23 @@
+---
+import '@fontsource/lato/300.css';
+import '@fontsource/lato/400.css';
+import '@fontsource/lato/700.css';
+import '@fontsource/lato/900.css';
+import '../assets/css/global.css';
+---
+
+<head lang="es">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<title>Astro CRUD</title>
+</head>
+<body class="bg-slate-900 h-screen">
+	<div class="px-6 py-3">
+		<slot />
+	</div>
+
+	<script
+		is:inline
+		src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"
+	></script>
+</body>

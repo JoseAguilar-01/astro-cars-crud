@@ -1,0 +1,134 @@
+{
+	"cars": [
+		{
+			"id": 1,
+			"brand": "Toyota",
+			"model": "Corolla",
+			"year": 2022,
+			"color": "Gray",
+			"price": 25000,
+			"features": {
+				"engine": "Gasoline 1.8L",
+				"transmission": "Automatic",
+				"drivetrain": "Front-wheel Drive"
+			}
+		},
+		{
+			"id": 2,
+			"brand": "Honda",
+			"model": "Civic",
+			"year": 2023,
+			"color": "Red",
+			"price": 27000,
+			"features": {
+				"engine": "Gasoline 2.0L",
+				"transmission": "Automatic",
+				"drivetrain": "Front-wheel Drive"
+			}
+		},
+		{
+			"id": 3,
+			"brand": "Ford",
+			"model": "Mustang",
+			"year": 2024,
+			"color": "Black",
+			"price": 45000,
+			"features": {
+				"engine": "Gasoline 5.0L V8",
+				"transmission": "Manual",
+				"drivetrain": "Rear-wheel Drive"
+			}
+		},
+		{
+			"id": 4,
+			"brand": "Chevrolet",
+			"model": "Camaro",
+			"year": 2023,
+			"color": "Blue",
+			"price": 42000,
+			"features": {
+				"engine": "Gasoline 6.2L V8",
+				"transmission": "Manual",
+				"drivetrain": "Rear-wheel Drive"
+			}
+		},
+		{
+			"id": 5,
+			"brand": "Volkswagen",
+			"model": "Golf",
+			"year": 2022,
+			"color": "White",
+			"price": 28000,
+			"features": {
+				"engine": "Gasoline 1.4L Turbo",
+				"transmission": "Automatic",
+				"drivetrain": "Front-wheel Drive"
+			}
+		},
+		{
+			"id": 6,
+			"brand": "BMW",
+			"model": "3 Series",
+			"year": 2023,
+			"color": "Silver",
+			"price": 52000,
+			"features": {
+				"engine": "Gasoline 2.0L Turbo",
+				"transmission": "Automatic",
+				"drivetrain": "All-wheel Drive"
+			}
+		},
+		{
+			"id": 7,
+			"brand": "Mercedes-Benz",
+			"model": "C-Class",
+			"year": 2024,
+			"color": "Black",
+			"price": 60000,
+			"features": {
+				"engine": "Gasoline 3.0L Turbo",
+				"transmission": "Automatic",
+				"drivetrain": "Rear-wheel Drive"
+			}
+		},
+		{
+			"id": 8,
+			"brand": "Audi",
+			"model": "A4",
+			"year": 2022,
+			"color": "Gray",
+			"price": 47000,
+			"features": {
+				"engine": "Gasoline 2.0L Turbo",
+				"transmission": "Automatic",
+				"drivetrain": "All-wheel Drive"
+			}
+		},
+		{
+			"id": 9,
+			"brand": "Lexus",
+			"model": "ES",
+			"year": 2023,
+			"color": "White",
+			"price": 49000,
+			"features": {
+				"engine": "Gasoline 3.5L V6",
+				"transmission": "Automatic",
+				"drivetrain": "Front-wheel Drive"
+			}
+		},
+		{
+			"id": 10,
+			"brand": "Tesla",
+			"model": "Model S",
+			"year": 2024,
+			"color": "Black",
+			"price": 80000,
+			"features": {
+				"engine": "Electric",
+				"transmission": "Automatic",
+				"drivetrain": "All-wheel Drive"
+			}
+		}
+	]
+}

@@ -1,0 +1,188 @@
+---
+import Input from './InputForm.astro';
+import type { Props } from '@interfaces/carForm';
+
+const { car } = Astro.props;
+
+const { pathname } = Astro.url;
+
+const isEditing = pathname.includes('edit');
+---
+
+<form class="space-y-6">
+	<h5 class="text-2xl font-medium text-gray-900" hidden={!isEditing}>
+		Editar el modelo: <span class="font-bold">{car?.model}</span>
+	</h5>
+
+	<div
+		class={`grid md:grid-cols-2 gap-3 ${isEditing ? 'text-gray-900' : 'text-white'}`}
+	>
+		{
+			!isEditing && (
+				<Input
+					name="model"
+					id="model"
+					placeholder="911 Turbo"
+					value={car?.model}
+					label="Modelo"
+				/>
+			)
+		}
+
+		<Input
+			name="brand"
+			id="brand"
+			placeholder="Porsche"
+			value={car?.brand}
+			label="Marca"
+		/>
+
+		<Input
+			type="number"
+			name="year"
+			id="year"
+			placeholder="911 Turbo"
+			value={car?.year}
+			label="Año"
+		/>
+
+		<Input
+			name="color"
+			id="color"
+			placeholder="Rojo"
+			value={car?.color}
+			label="Color"
+		/>
+
+		<Input
+			type="number"
+			name="price"
+			id="price"
+			placeholder="10000"
+			value={car?.price}
+			label="Precio"
+		/>
+
+		<Input
+			label="Motor"
+			name="engine"
+			id="engine"
+			placeholder="v8 5.0L"
+			value={car?.features?.engine}
+		/>
+
+		<Input
+			label="Transmisión"
+			name="transmission"
+			id="transmission"
+			placeholder="Manual"
+			value={car?.features?.transmission}
+		/>
+
+		<Input
+			label="Tracción"
+			name="drivetrain"
+			id="drivetrain"
+			placeholder="Delantera"
+			value={car?.features?.drivetrain}
+			containerClassName={isEditing ? 'md:col-span-2' : ''}
+		/>
+	</div>
+
+	<div class="flex items-center flex-wrap gap-5">
+		<button
+			type="submit"
+			class="cursor-default w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-md px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors"
+		>
+			{isEditing ? 'Actualizar' : 'Agregar'} Modelo
+		</button>
+
+		<slot />
+	</div>
+</form>
+
+<script>
+	import { carServiceInstance } from '@services/carService';
+	import type { Car, Features } from '@interfaces/car';
+
+	const form = document.querySelector('form');
+
+	const isEditing = window.location.pathname.includes('edit');
+
+	const getFormValues = (defaultValues?: Car): Car | undefined => {
+		if (!form) return;
+
+		const formData = new FormData(form);
+
+		const featuresKeys: Array<keyof Car['features']> = [
+			'engine',
+			'transmission',
+			'drivetrain',
+		];
+
+		const KeysToMap: Array<keyof Car | keyof Car['features']> = [
+			'brand',
+			'color',
+			'price',
+			'year',
+			...featuresKeys,
+		];
+
+		!isEditing && KeysToMap.push('model');
+
+		let formValues: Record<string, string | number | Features> = defaultValues
+			? { ...defaultValues }
+			: {};
+
+		KeysToMap.map((key) => {
+			if (featuresKeys.includes(key as keyof Car['features'])) {
+				formValues.features = {
+					...(formValues.features as Features),
+					[key]: formData.get(key),
+				};
+			}
+
+			formValues = {
+				...formValues,
+				[key]: formData.get(key) as string | number,
+			};
+		});
+
+		return formValues as unknown as Car;
+	};
+
+	const createCar = () => {
+		const formValues = getFormValues();
+
+		if (!formValues) return;
+
+		carServiceInstance.createCar(formValues);
+	};
+
+	const updateCar = () => {
+		const carId = window.location.pathname.split('/')[2];
+
+		carServiceInstance.getCarById(carId).then((currentCar) => {
+			if (!currentCar) return;
+
+			const formValues = getFormValues(currentCar);
+
+			if (!formValues) return;
+
+			carServiceInstance.updateCar(formValues);
+		});
+	};
+
+	const handleSubmit = (e: SubmitEvent) => {
+		if (!form) return;
+		e.preventDefault();
+
+		isEditing ? updateCar() : createCar();
+
+		window.location.href = '/';
+
+		form?.removeEventListener('submit', handleSubmit);
+	};
+
+	form?.addEventListener('submit', handleSubmit);
+</script>

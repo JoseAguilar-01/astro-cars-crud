@@ -1,0 +1,8 @@
+/.vscode
+node_modules
+astro.config.mjs
+.gitignore
+README.md
+package-lock.json
+pnpm-lock.yaml
+tsconfig.json
